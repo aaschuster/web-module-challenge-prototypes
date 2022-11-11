@@ -15,10 +15,24 @@
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+    this.eat 
 }
 
+Person.prototype.eat = function(str) {
+  if(this.stomach.length<10) {
+    this.stomach.push(str);
+  }
+}
+Person.prototype.poop = function() {
+  this.stomach = [];
+}
+Person.prototype.toString = function() {
+  return this.name + ", " + this.age;
+}  
 
 /*
   TASK 2
@@ -36,10 +50,24 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, mpg) {
+  this.model = model;
+  this.milesPerGallon = mpg;
+  this.tank = 0;
+  this.odometer = 0;
 }
 
+Car.prototype.fill = function(gallons) {
+  this.tank += gallons;
+}
+
+Car.prototype.drive = function(distance) {
+  this.odometer += distance;
+  if(distance/this.milesPerGallon>this.tank) {
+    odometer += this.tank * this.milesPerGallon
+    return "I ran out of fuel at " + this.odometer + " miles!"
+  } else this.tank -= distance/this.milesPerGallon;
+}
 
 /*
   TASK 3
@@ -49,18 +77,26 @@ function Car() {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
 
+  this.favoriteToy = favoriteToy;
+}
+
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function() {
+  return "Playing with " + this.favoriteToy;
 }
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window/Global binding: if used in the global scope and not specified another way the "this" keyword will bind to the window.
+  2. Implicit binding: when using the dot syntax the object preceding the dot is the context of "this"
+  3. New binding: when using a constructor function with the "new" keyword the context of "this" will be set to the new object that the "new" keyword creates.
+  4. Explicit binding: we can explicitly define the context of "this" using methods such as .call, .apply or .bind
 */
 
 ///////// END OF CHALLENGE /////////
